@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,8 +45,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $technologies = Technology::all();
 
-        return view("admin.projects.create");
+        return view("admin.projects.create", compact('technologies'));
     }
 
     /**
@@ -60,6 +62,10 @@ class ProjectController extends Controller
 
         $progetto->fill($dati_validati);
         $progetto->save();
+
+        if ($request->technologies) {
+            $progetto->technologies()->attach($request->technologies);
+        }
 
         return redirect()->route("admin.projects.show", $progetto->id);
     }

@@ -42,6 +42,17 @@
                     <label for="topic" class="form-label">topic</label>
                     <input type="text" class="form-control" id="topic" name="topic">
                 </div>
+                <div class="mb-3">
+                    <label for="technologies" class="form-label">Seleziona la tecnologia associata</label>
+                    <select multiple name="technologies[]" id="technologies" class="form-select">
+                        <option value="">Seleziona almeno una technologies</option>
+                        @foreach ($technologies as $technology)
+                            <option value="{{ $technology->id }}">{{ $technology->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
 
                 <button type="submit" class="btn btn-primary">Inserisci</button>
             </form>
