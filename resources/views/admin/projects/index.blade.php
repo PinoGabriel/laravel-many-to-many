@@ -15,6 +15,18 @@
                                 alt="{{ $project->title }}">
                         </a>
                         <div class="card-body">{{ $project->topic }}</div>
+                        <div class="card-body">
+                            @if (count($project->technologies) > 0)
+                                <ul>
+                                    @foreach ($project->technologies as $technology)
+                                        <li>{{ $technology->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <span>Nessuna Technology collegata</span>
+                            @endif
+
+                        </div>
                         <div class="d-flex justify-content-center">
                             <a href="{{ route('admin.projects.show', $project->id) }}"
                                 class="btn btn-primary mx-2 mb-2">Show
